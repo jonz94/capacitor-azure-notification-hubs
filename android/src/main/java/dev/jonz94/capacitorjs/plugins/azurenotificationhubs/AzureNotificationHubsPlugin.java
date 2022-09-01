@@ -1,80 +1,19 @@
 package dev.jonz94.capacitorjs.plugins.azurenotificationhubs;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.service.notification.StatusBarNotification;
-import androidx.core.app.NotificationCompat;
-import com.getcapacitor.Bridge;
-import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
-import com.getcapacitor.PluginHandle;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 import com.getcapacitor.annotation.Permission;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.messaging.RemoteMessage;
 import com.microsoft.windowsazure.messaging.notificationhubs.NotificationHub;
-import java.util.Arrays;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 @CapacitorPlugin(name = "AzureNotificationHubs", permissions = @Permission(strings = {}, alias = "receive"))
 public class AzureNotificationHubsPlugin extends Plugin {
 
-    public static Bridge staticBridge = null;
-    public static RemoteMessage lastMessage = null;
-    public NotificationManager notificationManager;
-    public MessagingService firebaseMessagingService;
-    private NotificationChannelManager notificationChannelManager;
-
     private static final String EVENT_TOKEN_CHANGE = "registration";
     private static final String EVENT_TOKEN_ERROR = "registrationError";
-
-    public void load() {
-        notificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
-        firebaseMessagingService = new MessagingService();
-
-        staticBridge = this.bridge;
-        if (lastMessage != null) {
-            fireNotification(lastMessage);
-            lastMessage = null;
-        }
-
-        notificationChannelManager = new NotificationChannelManager(getActivity(), notificationManager, getConfig());
-    }
-
-    @Override
-    protected void handleOnNewIntent(Intent data) {
-        super.handleOnNewIntent(data);
-        Bundle bundle = data.getExtras();
-        if (bundle != null && bundle.containsKey("google.message_id")) {
-            JSObject notificationJson = new JSObject();
-            JSObject dataObject = new JSObject();
-            for (String key : bundle.keySet()) {
-                if (key.equals("google.message_id")) {
-                    notificationJson.put("id", bundle.get(key));
-                } else {
-                    Object value = bundle.get(key);
-                    String valueStr = (value != null) ? value.toString() : null;
-                    dataObject.put(key, valueStr);
-                }
-            }
-            notificationJson.put("data", dataObject);
-            JSObject actionJson = new JSObject();
-            actionJson.put("actionId", "tap");
-            actionJson.put("notification", notificationJson);
-            notifyListeners("pushNotificationActionPerformed", actionJson, true);
-        }
-    }
 
     @PluginMethod
     public void register(PluginCall call) {
@@ -113,91 +52,6 @@ public class AzureNotificationHubsPlugin extends Plugin {
         call.resolve();
     }
 
-    @PluginMethod
-    public void getDeliveredNotifications(PluginCall call) {
-        JSArray notifications = new JSArray();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            StatusBarNotification[] activeNotifications = notificationManager.getActiveNotifications();
-
-            for (StatusBarNotification notif : activeNotifications) {
-                JSObject jsNotif = new JSObject();
-
-                jsNotif.put("id", notif.getId());
-                jsNotif.put("tag", notif.getTag());
-
-                Notification notification = notif.getNotification();
-                if (notification != null) {
-                    jsNotif.put("title", notification.extras.getCharSequence(Notification.EXTRA_TITLE));
-                    jsNotif.put("body", notification.extras.getCharSequence(Notification.EXTRA_TEXT));
-                    jsNotif.put("group", notification.getGroup());
-                    jsNotif.put("groupSummary", 0 != (notification.flags & Notification.FLAG_GROUP_SUMMARY));
-
-                    JSObject extras = new JSObject();
-
-                    for (String key : notification.extras.keySet()) {
-                        extras.put(key, notification.extras.get(key));
-                    }
-
-                    jsNotif.put("data", extras);
-                }
-
-                notifications.put(jsNotif);
-            }
-        }
-
-        JSObject result = new JSObject();
-        result.put("notifications", notifications);
-        call.resolve(result);
-    }
-
-    @PluginMethod
-    public void removeDeliveredNotifications(PluginCall call) {
-        JSArray notifications = call.getArray("notifications");
-
-        try {
-            for (Object o : notifications.toList()) {
-                if (o instanceof JSONObject) {
-                    JSObject notif = JSObject.fromJSONObject((JSONObject) o);
-                    String tag = notif.getString("tag");
-                    Integer id = notif.getInteger("id");
-
-                    if (tag == null && id != null) {
-                        notificationManager.cancel(id);
-                    } else if (tag != null && id != null) {
-                        notificationManager.cancel(tag, id);
-                    }
-                } else {
-                    call.reject("Expected notifications to be a list of notification objects");
-                }
-            }
-        } catch (JSONException e) {
-            call.reject(e.getMessage());
-        }
-
-        call.resolve();
-    }
-
-    @PluginMethod
-    public void removeAllDeliveredNotifications(PluginCall call) {
-        notificationManager.cancelAll();
-        call.resolve();
-    }
-
-    @PluginMethod
-    public void createChannel(PluginCall call) {
-        notificationChannelManager.createChannel(call);
-    }
-
-    @PluginMethod
-    public void deleteChannel(PluginCall call) {
-        notificationChannelManager.deleteChannel(call);
-    }
-
-    @PluginMethod
-    public void listChannels(PluginCall call) {
-        notificationChannelManager.listChannels(call);
-    }
-
     public void sendToken(String token) {
         JSObject data = new JSObject();
         data.put("value", token);
@@ -208,88 +62,5 @@ public class AzureNotificationHubsPlugin extends Plugin {
         JSObject data = new JSObject();
         data.put("error", error);
         notifyListeners(EVENT_TOKEN_ERROR, data, true);
-    }
-
-    public static void onNewToken(String newToken) {
-        AzureNotificationHubsPlugin azureNotificationHubsPlugin = AzureNotificationHubsPlugin.getPushNotificationsInstance();
-        if (azureNotificationHubsPlugin != null) {
-            azureNotificationHubsPlugin.sendToken(newToken);
-        }
-    }
-
-    public static void sendRemoteMessage(RemoteMessage remoteMessage) {
-        AzureNotificationHubsPlugin azureNotificationHubsPlugin = AzureNotificationHubsPlugin.getPushNotificationsInstance();
-        if (azureNotificationHubsPlugin != null) {
-            azureNotificationHubsPlugin.fireNotification(remoteMessage);
-        } else {
-            lastMessage = remoteMessage;
-        }
-    }
-
-    public void fireNotification(RemoteMessage remoteMessage) {
-        JSObject remoteMessageData = new JSObject();
-
-        JSObject data = new JSObject();
-        remoteMessageData.put("id", remoteMessage.getMessageId());
-        for (String key : remoteMessage.getData().keySet()) {
-            Object value = remoteMessage.getData().get(key);
-            data.put(key, value);
-        }
-        remoteMessageData.put("data", data);
-
-        RemoteMessage.Notification notification = remoteMessage.getNotification();
-        if (notification != null) {
-            String title = notification.getTitle();
-            String body = notification.getBody();
-            String[] presentation = getConfig().getArray("presentationOptions");
-            if (presentation != null) {
-                if (Arrays.asList(presentation).contains("alert")) {
-                    Bundle bundle = null;
-                    try {
-                        ApplicationInfo applicationInfo = getContext()
-                            .getPackageManager()
-                            .getApplicationInfo(getContext().getPackageName(), PackageManager.GET_META_DATA);
-                        bundle = applicationInfo.metaData;
-                    } catch (PackageManager.NameNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                    int pushIcon = android.R.drawable.ic_dialog_info;
-
-                    if (bundle != null && bundle.getInt("com.google.firebase.messaging.default_notification_icon") != 0) {
-                        pushIcon = bundle.getInt("com.google.firebase.messaging.default_notification_icon");
-                    }
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(
-                        getContext(),
-                        NotificationChannelManager.FOREGROUND_NOTIFICATION_CHANNEL_ID
-                    )
-                        .setSmallIcon(pushIcon)
-                        .setContentTitle(title)
-                        .setContentText(body)
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-                    notificationManager.notify(0, builder.build());
-                }
-            }
-            remoteMessageData.put("title", title);
-            remoteMessageData.put("body", body);
-            remoteMessageData.put("click_action", notification.getClickAction());
-
-            Uri link = notification.getLink();
-            if (link != null) {
-                remoteMessageData.put("link", link.toString());
-            }
-        }
-
-        notifyListeners("pushNotificationReceived", remoteMessageData, true);
-    }
-
-    public static AzureNotificationHubsPlugin getPushNotificationsInstance() {
-        if (staticBridge != null && staticBridge.getWebView() != null) {
-            PluginHandle handle = staticBridge.getPlugin("PushNotifications");
-            if (handle == null) {
-                return null;
-            }
-            return (AzureNotificationHubsPlugin) handle.getInstance();
-        }
-        return null;
     }
 }
