@@ -17,7 +17,7 @@
     "name": "jonz94",
     "email": "jody16888@gmail.com"
   },
-  "license": "MIT",
+  "license": "0BSD",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jonz94/capacitor-azure-notification-hubs.git"
