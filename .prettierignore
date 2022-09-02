@@ -1,2 +1,4 @@
-build
-dist
+dist/
+ios/Pods/
+*.md
+package-lock.json

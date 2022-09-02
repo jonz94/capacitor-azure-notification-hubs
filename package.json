@@ -2,29 +2,6 @@
   "name": "@jonz94/capacitor-azure-notification-hubs",
   "version": "0.2.0",
   "description": "Capacitor plugin to register push notifications via Azure Notification Hub.",
-  "main": "dist/plugin.cjs.js",
-  "module": "dist/esm/index.js",
-  "types": "dist/esm/index.d.ts",
-  "unpkg": "dist/plugin.js",
-  "files": [
-    "android/src/main/",
-    "android/build.gradle",
-    "dist/",
-    "ios/Plugin/",
-    "Jonz94CapacitorAzureNotificationHubs.podspec"
-  ],
-  "author": {
-    "name": "jonz94",
-    "email": "jody16888@gmail.com"
-  },
-  "license": "0BSD",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jonz94/capacitor-azure-notification-hubs.git"
-  },
-  "bugs": {
-    "url": "https://github.com/jonz94/capacitor-azure-notification-hubs/issues"
-  },
   "keywords": [
     "capacitor",
     "plugin",
@@ -33,21 +10,48 @@
     "push",
     "notification"
   ],
+  "bugs": {
+    "url": "https://github.com/jonz94/capacitor-azure-notification-hubs/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonz94/capacitor-azure-notification-hubs.git"
+  },
+  "license": "0BSD",
+  "author": {
+    "name": "jonz94",
+    "email": "jody16888@gmail.com"
+  },
+  "main": "dist/plugin.cjs.js",
+  "unpkg": "dist/plugin.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "files": [
+    "android/src/main/",
+    "android/build.gradle",
+    "dist/",
+    "ios/Plugin/",
+    "Jonz94CapacitorAzureNotificationHubs.podspec"
+  ],
   "scripts": {
-    "verify": "npm run verify:ios && npm run verify:android && npm run verify:web",
-    "verify:ios": "cd ios && pod install && xcodebuild -workspace Plugin.xcworkspace -scheme Plugin -destination generic/platform=iOS && cd ..",
-    "verify:android": "cd android && ./gradlew clean build test && cd ..",
-    "verify:web": "npm run build",
-    "lint": "npm run eslint && npm run prettier -- --check && npm run swiftlint -- lint",
-    "fmt": "npm run eslint -- --fix && npm run prettier -- --write && npm run swiftlint -- --fix --format",
-    "eslint": "eslint . --ext ts",
-    "prettier": "prettier \"**/*.{css,html,ts,js,java}\"",
-    "swiftlint": "node-swiftlint",
-    "docgen": "docgen --api AzureNotificationHubsPlugin --output-readme README.md --output-json dist/docs.json",
     "build": "npm run clean && npm run docgen && tsc && rollup -c rollup.config.js",
     "clean": "rimraf ./dist",
-    "watch": "tsc --watch",
-    "prepublishOnly": "npm run build"
+    "docgen": "docgen --api AzureNotificationHubsPlugin --output-readme README.md --output-json dist/docs.json",
+    "eslint": "eslint . --ext ts",
+    "fmt": "npm run eslint -- --fix && npm run prettier -- --write && npm run swiftlint -- --fix --format",
+    "lint": "npm run eslint && npm run prettier -- --check && npm run swiftlint -- lint",
+    "prepublishOnly": "npm run build",
+    "prettier": "prettier .",
+    "swiftlint": "node-swiftlint",
+    "verify": "npm run verify:ios && npm run verify:android && npm run verify:web",
+    "verify:android": "cd android && ./gradlew clean build test && cd ..",
+    "verify:ios": "cd ios && pod install && xcodebuild -workspace Plugin.xcworkspace -scheme Plugin -destination generic/platform=iOS && cd ..",
+    "verify:web": "npm run build",
+    "watch": "tsc --watch"
+  },
+  "prettier": "@ionic/prettier-config",
+  "eslintConfig": {
+    "extends": "@ionic/eslint-config/recommended"
   },
   "devDependencies": {
     "@capacitor/android": "^4.0.0",
@@ -60,6 +64,7 @@
     "eslint": "^7.32.0",
     "prettier": "^2.7.1",
     "prettier-plugin-java": "^1.6.2",
+    "prettier-plugin-packagejson": "^2.2.18",
     "rimraf": "^3.0.2",
     "rollup": "^2.79.0",
     "swiftlint": "^1.0.1",
@@ -68,10 +73,8 @@
   "peerDependencies": {
     "@capacitor/core": "^4.0.0"
   },
-  "prettier": "@ionic/prettier-config",
-  "swiftlint": "@ionic/swiftlint-config",
-  "eslintConfig": {
-    "extends": "@ionic/eslint-config/recommended"
+  "publishConfig": {
+    "access": "public"
   },
   "capacitor": {
     "ios": {
@@ -81,7 +84,5 @@
       "src": "android"
     }
   },
-  "publishConfig": {
-    "access": "public"
-  }
+  "swiftlint": "@ionic/swiftlint-config"
 }
