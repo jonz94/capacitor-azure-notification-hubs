@@ -1,6 +1,6 @@
 {
   "name": "@jonz94/capacitor-azure-notification-hubs",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "Capacitor plugin to register push notifications via Azure Notification Hub.",
   "keywords": [
     "capacitor",
