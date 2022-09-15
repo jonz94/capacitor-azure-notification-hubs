@@ -6,7 +6,8 @@ export interface AzureNotificationHubsPlugin {
    *
    * This method will trigger the `'registration'` event with the push token or
    * `'registrationError'` if there was a problem. It does not prompt the user for
-   * notification permissions, use `requestPermissions()` first.
+   * notification permissions, use `PushNotifications.requestPermissions()` from
+   * `@capacitor/push-notifications` first.
    *
    * @since 1.0.0
    */
@@ -47,16 +48,22 @@ export interface AzureNotificationHubsPlugin {
 export interface RegisterInfo {
   /**
    * The notification hub name.
+   *
+   * @since 1.0.0
    */
   notificationHubName: string;
 
   /**
    * The connection string.
+   *
+   * @since 1.0.0
    */
   connectionString: string;
 
   /**
    * The device tag.
+   *
+   * @since 1.0.0
    */
   deviceTag: string;
 }

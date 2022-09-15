@@ -115,7 +115,8 @@ Register the app to receive push notifications.
 
 This method will trigger the `'registration'` event with the push token or
 `'registrationError'` if there was a problem. It does not prompt the user for
-notification permissions, use `requestPermissions()` first.
+notification permissions, use `PushNotifications.requestPermissions()` from
+`@capacitor/push-notifications` first.
 
 | Param      | Type                                                  |
 | ---------- | ----------------------------------------------------- |
@@ -188,11 +189,11 @@ Remove all native listeners for this plugin.
 
 #### RegisterInfo
 
-| Prop                      | Type                | Description                |
-| ------------------------- | ------------------- | -------------------------- |
-| **`notificationHubName`** | <code>string</code> | The notification hub name. |
-| **`connectionString`**    | <code>string</code> | The connection string.     |
-| **`deviceTag`**           | <code>string</code> | The device tag.            |
+| Prop                      | Type                | Description                | Since |
+| ------------------------- | ------------------- | -------------------------- | ----- |
+| **`notificationHubName`** | <code>string</code> | The notification hub name. | 1.0.0 |
+| **`connectionString`**    | <code>string</code> | The connection string.     | 1.0.0 |
+| **`deviceTag`**           | <code>string</code> | The device tag.            | 1.0.0 |
 
 
 #### PluginListenerHandle
