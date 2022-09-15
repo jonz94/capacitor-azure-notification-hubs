@@ -41,9 +41,9 @@ The Push Notification API uses [Firebase Cloud Messaging](https://firebase.googl
 
 This plugin will use the following project variables (defined in your app's `variables.gradle` file):
 - `$firebaseMessagingVersion` version of `com.google.firebase:firebase-messagin` (default: `23.0.5`)
-- `$azureNotificationHubsVersion` version of `me.leolin:ShortcutBadger` (default: `1.1.4`)
+- `$azureNotificationHubsVersion` version of `com.microsoft.azure:notification-hubs-android-sdk-fcm` (default: `1.1.4`)
 - `$androidVolleyVersion` version of `com.android.volley:volley` (default: `1.2.1`)
-- `$kotlinVersion` version of `org.jetbrains.kotlin:kotlin-stdlib-jdk7:` (default: `1.7.10`)
+- `$kotlinVersion` version of `org.jetbrains.kotlin:kotlin-stdlib-jdk7` (default: `1.7.10`)
 - `$coreKtx` version of `androidx.core:core-ktx` (default: `1.8.0`)
 
 ## Configuration
