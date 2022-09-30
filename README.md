@@ -217,3 +217,11 @@ Remove all native listeners for this plugin.
 | **`error`** | <code>string</code> | Error message describing the registration failure. | 1.0.0 |
 
 </docgen-api>
+
+## Changelog
+
+See [CHANGELOG.md](https://github.com/jonz94/capacitor-azure-notification-hubs/blob/main/CHANGELOG.md).
+
+## License
+
+See [LICENSE](https://github.com/jonz94/capacitor-azure-notification-hubs/blob/main/LICENSE).
