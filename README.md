@@ -2,7 +2,7 @@
 <h3 align="center">Azure Notification Hubs</h3>
 <p align="center"><strong><code>@jonz94/capacitor-azure-notification-hubs</code></strong></p>
 <p align="center">
-  Capacitor plugin to register push notifications via Azure Notification Hub.
+  Capacitor plugin to register push notifications via <a href="https://learn.microsoft.com/en-us/azure/notification-hubs/">Azure Notification Hub</a>.
 </p>
 
 <p align="center">
@@ -20,17 +20,29 @@ npx cap sync
 
 ## iOS
 
-On iOS you must enable the Push Notifications capability. See [Setting Capabilities](https://capacitorjs.com/docs/v3/ios/configuration#setting-capabilities) for instructions on how to enable the capability.
+On iOS you must enable the Push Notifications capability. See [Setting Capabilities](https://capacitorjs.com/docs/ios/configuration#setting-capabilities) for instructions on how to enable the capability.
 
-After enabling the Push Notifications capability, add the following to your app's `AppDelegate.swift`:
+After enabling the Push Notifications capability, add the following lines to `ios/App/App/AppDelegate.swift`:
 
-```swift
-func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-  NotificationCenter.default.post(name: .capacitorDidRegisterForRemoteNotifications, object: deviceToken)
-}
+```diff
+import UIKit
+import Capacitor
 
-func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-  NotificationCenter.default.post(name: .capacitorDidFailToRegisterForRemoteNotifications, object: error)
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate {
+
+    var window: UIWindow?
+
++    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
++        NotificationCenter.default.post(name: .capacitorDidRegisterForRemoteNotifications, object: deviceToken)
++    }
++
++    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
++        NotificationCenter.default.post(name: .capacitorDidFailToRegisterForRemoteNotifications, object: error)
++    }
+
+    // ...
+
 }
 ```
 
