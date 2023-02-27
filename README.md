@@ -72,7 +72,7 @@ import { AzureNotificationHubs } from '@jonz94/capacitor-azure-notification-hubs
 
 const addListeners = async () => {
   await AzureNotificationHubs.addListener('registration', token => {
-    console.info('Registration token: ', token.value);
+    console.log('Registration token: ', token.value);
   });
 
   await AzureNotificationHubs.addListener('registrationError', err => {
