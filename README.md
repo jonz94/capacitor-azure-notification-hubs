@@ -91,9 +91,9 @@ const registerNotifications = async () => {
     throw new Error('User denied permissions!');
   }
 
-  const { uuid } = await Device.getId();
+  const { identifier } = await Device.getId();
 
-  const myDeviceTag = `${uuid}-${Date.now()}`
+  const myDeviceTag = `${identifier}-${Date.now()}`
 
   await AzureNotificationHubs.register({
     notificationHubName: 'azure-notification-hub-name',
