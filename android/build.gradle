@@ -8,7 +8,7 @@ buildscript {
         azureNotificationHubsVersion = project.hasProperty('azureNotificationHubsVersion') ? rootProject.ext.azureNotificationHubsVersion : '1.1.4'
         androidVolleyVersion = project.hasProperty('androidVolleyVersion') ? rootProject.ext.androidVolleyVersion : '1.2.1'
         androidxCoreKTXVersion = project.hasProperty('androidxCoreKTXVersion') ? rootProject.ext.androidxCoreKTXVersion : '1.10.0'
-        kotlin_version = project.hasProperty('kotlinVersion') ? rootProject.ext.kotlin_version : '1.8.20'
+        kotlin_version = project.hasProperty('kotlin_version') ? rootProject.ext.kotlinVersion : '1.8.20'
     }
     repositories {
         google()
