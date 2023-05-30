@@ -1,3 +1,4 @@
+android/build/
 dist/
 ios/Pods/
 *.md
