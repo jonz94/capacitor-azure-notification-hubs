@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.0-beta.1](https://github.com/jonz94/capacitor-azure-notification-hubs/compare/v2.0.0-beta.0...v2.0.0-beta.1) (2023-05-30)
+
+## [2.0.0-beta.0](https://github.com/jonz94/capacitor-azure-notification-hubs/compare/v1.0.2...v2.0.0-beta.0) (2023-05-30)
+
+### ⚠ BREAKING CHANGES
+
+- upgrade to Capacitor 5
+
+### Features
+
+- upgrade to Capacitor 5 ([967358c](https://github.com/jonz94/capacitor-azure-notification-hubs/commit/967358c14fb104ec7b78ef2bb1892400a976cdad))
+
+### Bug Fixes
+
+- **android:** correct typo ([f829d55](https://github.com/jonz94/capacitor-azure-notification-hubs/commit/f829d55a168711c8c1d5fdf70b24c4a4cff2a635))
+
 ### [1.0.2](https://github.com/jonz94/capacitor-azure-notification-hubs/compare/v1.0.1...v1.0.2) (2022-11-11)
 
 ### Bug Fixes

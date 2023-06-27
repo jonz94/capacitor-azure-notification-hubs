@@ -53,11 +53,11 @@ The Push Notification API uses [Firebase Cloud Messaging](https://firebase.googl
 ### Variables
 
 This plugin will use the following project variables (defined in your app's `variables.gradle` file):
-- `$firebaseMessagingVersion` version of `com.google.firebase:firebase-messaging` (default: `23.0.5`)
-- `$azureNotificationHubsVersion` version of `com.microsoft.azure:notification-hubs-android-sdk-fcm` (default: `1.1.4`)
-- `$androidVolleyVersion` version of `com.android.volley:volley` (default: `1.2.1`)
-- `$kotlinVersion` version of `org.jetbrains.kotlin:kotlin-stdlib-jdk7` (default: `1.7.10`)
-- `$coreKtx` version of `androidx.core:core-ktx` (default: `1.8.0`)
+- `firebaseMessagingVersion` version of `com.google.firebase:firebase-messaging` (default: `23.1.2`)
+- `azureNotificationHubsVersion` version of `com.microsoft.azure:notification-hubs-android-sdk-fcm` (default: `1.1.4`)
+- `androidVolleyVersion` version of `com.android.volley:volley` (default: `1.2.1`)
+- `androidxCoreKTXVersion` version of `androidx.core:core-ktx` (default: `1.10.0`)
+- `kotlin_version` version of `org.jetbrains.kotlin:kotlin-stdlib` (default: `1.8.20`)
 
 ## Configuration
 
@@ -91,9 +91,9 @@ const registerNotifications = async () => {
     throw new Error('User denied permissions!');
   }
 
-  const { uuid } = await Device.getId();
+  const { identifier } = await Device.getId();
 
-  const myDeviceTag = `${uuid}-${Date.now()}`
+  const myDeviceTag = `${identifier}-${Date.now()}`
 
   await AzureNotificationHubs.register({
     notificationHubName: 'azure-notification-hub-name',
