@@ -22,7 +22,7 @@ export interface AzureNotificationHubsPlugin {
    */
   addListener(
     eventName: 'registration',
-    listenerFunc: (token: Token) => void
+    listenerFunc: (token: Token) => void,
   ): Promise<PluginListenerHandle> & PluginListenerHandle;
 
   /**
@@ -34,7 +34,7 @@ export interface AzureNotificationHubsPlugin {
    */
   addListener(
     eventName: 'registrationError',
-    listenerFunc: (error: RegistrationError) => void
+    listenerFunc: (error: RegistrationError) => void,
   ): Promise<PluginListenerHandle> & PluginListenerHandle;
 
   /**
