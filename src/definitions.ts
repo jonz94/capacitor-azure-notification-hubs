@@ -20,10 +20,7 @@ export interface AzureNotificationHubsPlugin {
    *
    * @since 1.0.0
    */
-  addListener(
-    eventName: 'registration',
-    listenerFunc: (token: Token) => void,
-  ): Promise<PluginListenerHandle> & PluginListenerHandle;
+  addListener(eventName: 'registration', listenerFunc: (token: Token) => void): Promise<PluginListenerHandle>;
 
   /**
    * Called when the push notification registration finished with problems.
@@ -35,7 +32,7 @@ export interface AzureNotificationHubsPlugin {
   addListener(
     eventName: 'registrationError',
     listenerFunc: (error: RegistrationError) => void,
-  ): Promise<PluginListenerHandle> & PluginListenerHandle;
+  ): Promise<PluginListenerHandle>;
 
   /**
    * Remove all native listeners for this plugin.
