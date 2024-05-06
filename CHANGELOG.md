@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.0.0-beta.0](https://github.com/jonz94/capacitor-azure-notification-hubs/compare/v2.0.0...v3.0.0-beta.0) (2024-05-06)
+
+### ⚠ BREAKING CHANGES
+
+- upgrade to Capacitor 6
+
+### Features
+
+- upgrade to Capacitor 6 ([3c83faa](https://github.com/jonz94/capacitor-azure-notification-hubs/commit/3c83faaf7c176fd561a79a443aea15992a84b914))
+
 ## [2.0.0](https://github.com/jonz94/capacitor-azure-notification-hubs/compare/v1.0.2...v2.0.0) (2023-06-27)
 
 ### ⚠ BREAKING CHANGES
