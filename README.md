@@ -56,8 +56,8 @@ This plugin will use the following project variables (defined in your app's `var
 - `firebaseMessagingVersion` version of `com.google.firebase:firebase-messaging` (default: `23.1.2`)
 - `azureNotificationHubsVersion` version of `com.microsoft.azure:notification-hubs-android-sdk-fcm` (default: `2.0.0`)
 - `androidVolleyVersion` version of `com.android.volley:volley` (default: `1.2.1`)
-- `androidxCoreKTXVersion` version of `androidx.core:core-ktx` (default: `1.10.0`)
-- `kotlin_version` version of `org.jetbrains.kotlin:kotlin-stdlib` (default: `1.8.20`)
+- `androidxCoreKTXVersion` version of `androidx.core:core-ktx` (default: `1.12.0`)
+- `kotlin_version` version of `org.jetbrains.kotlin:kotlin-stdlib` (default: `1.9.10`)
 
 ## Configuration
 
