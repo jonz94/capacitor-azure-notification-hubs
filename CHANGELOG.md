@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.0.0-beta.1](https://github.com/jonz94/capacitor-azure-notification-hubs/compare/v3.0.0-beta.0...v3.0.0-beta.1) (2024-05-07)
+
+### ⚠ BREAKING CHANGES
+
+- update default version of `com.microsoft.azure:notification-hubs-android-sdk-fcm` to 2.0.0
+
+### Features
+
+- update default version of `com.microsoft.azure:notification-hubs-android-sdk-fcm` to 2.0.0 ([d8425a2](https://github.com/jonz94/capacitor-azure-notification-hubs/commit/d8425a2c4aedd684871e1a439a2fd5cea65b28ab))
+
 ## [3.0.0-beta.0](https://github.com/jonz94/capacitor-azure-notification-hubs/compare/v2.0.0...v3.0.0-beta.0) (2024-05-06)
 
 ### ⚠ BREAKING CHANGES
