@@ -2,7 +2,7 @@
 <h3 align="center">Azure Notification Hubs</h3>
 <p align="center"><strong><code>@jonz94/capacitor-azure-notification-hubs</code></strong></p>
 <p align="center">
-  Capacitor plugin to register push notifications via <a href="https://learn.microsoft.com/en-us/azure/notification-hubs/">Azure Notification Hub</a>.
+  Capacitor plugin to register push notifications via <a href="https://learn.microsoft.com/en-us/azure/notification-hubs/">Azure Notification Hubs</a>.
 </p>
 
 <p align="center">
