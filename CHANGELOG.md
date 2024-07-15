@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [3.0.1](https://github.com/jonz94/capacitor-azure-notification-hubs/compare/v3.0.0...v3.0.1) (2024-07-15)
 
+### Bug Fixes
+
+- update all development dependencies ([fa2723b](https://github.com/jonz94/capacitor-azure-notification-hubs/commit/fa2723bd92c8cc0a7364c6d198b48e6809621ed7))
+
 ## [3.0.0](https://github.com/jonz94/capacitor-azure-notification-hubs/compare/v2.0.0...v3.0.0) (2024-05-17)
 
 ### ⚠ BREAKING CHANGES
